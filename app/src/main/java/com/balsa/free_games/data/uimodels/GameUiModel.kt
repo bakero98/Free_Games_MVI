@@ -1,5 +1,6 @@
 package com.balsa.free_games.data.uimodels
 
+import com.balsa.free_games.utils.GENRE
 import org.threeten.bp.OffsetDateTime
 
 data class GameUiModel(
@@ -8,7 +9,7 @@ data class GameUiModel(
     var thumbnail: String = "",
     var shortDescription: String = "",
     var gameUrl : String = "",
-    var genre: String = "",
+    var genre: GENRE = GENRE.UNKNOWN,
     var platform: String = "",
     var publisher: String = "",
     var developer: String = "",

@@ -10,8 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Free_games">
-        <activity android:name=".ui.gameslist.GamesListActivity"></activity>
-        <activity android:name=".GamesListActivity">
+        <activity android:name=".ui.gameslist.GamesListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

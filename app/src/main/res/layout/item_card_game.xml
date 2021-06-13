@@ -38,6 +38,15 @@
             app:layout_constraintTop_toTopOf="@id/game_image"
             tools:text="Best Game Ever #1" />
 
+        <ImageView
+            android:id="@+id/genre_image"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="5dp"
+            tools:src="@drawable/ic_console"/>
+
         <include
             android:id="@+id/release_genre_details"
             layout="@layout/release_genre_details"

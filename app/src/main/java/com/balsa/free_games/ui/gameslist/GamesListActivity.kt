@@ -1,6 +1,5 @@
 package com.balsa.free_games.ui.gameslist
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.balsa.free_games.databinding.ActivityGamesListBinding
@@ -23,6 +22,7 @@ class GamesListActivity : BaseActivity<ActivityGamesListBinding, GamesListState,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.executeAction(GamesListAction.Init)
     }
 
 }

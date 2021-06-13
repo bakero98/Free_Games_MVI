@@ -24,5 +24,6 @@ class GamesListViewModel @ViewModelInject constructor(
 
     private fun getGames() = viewModelScope.launch {
         gamesList = getGamesUseCase.execute().toMutableList()
+        state.postValue(GamesListState.GamesLoaded(gamesList))
     }
 }

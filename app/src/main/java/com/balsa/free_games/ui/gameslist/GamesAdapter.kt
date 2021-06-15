@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.balsa.free_games.data.uimodels.GameUiModel
 import com.balsa.free_games.databinding.ItemCardGameBinding
+import com.balsa.free_games.utils.extensions.loadAllCapsString
 import com.balsa.free_games.utils.extensions.loadImage
 import com.balsa.free_games.utils.extensions.loadImageDrawableCompat
-import com.balsa.free_games.utils.extensions.loadString
 
 class GamesDiffUtil : DiffUtil.ItemCallback<GameUiModel>() {
     override fun areItemsTheSame(oldItem: GameUiModel, newItem: GameUiModel) = oldItem.id == newItem.id
@@ -51,7 +51,7 @@ class GameViewHolder(val binding: ItemCardGameBinding) : RecyclerView.ViewHolder
             game.releaseDate?.let { releaseDate ->
                 releaseGenreDetails.releaseDate.text = releaseDate.year.toString()
             }
-            releaseGenreDetails.genre.loadString(game.genre.labelRes)
+            releaseGenreDetails.genre.loadAllCapsString(game.genre.labelRes)
         }
     }
 }

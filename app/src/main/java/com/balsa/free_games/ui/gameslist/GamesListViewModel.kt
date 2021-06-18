@@ -5,12 +5,14 @@ import androidx.lifecycle.viewModelScope
 import com.balsa.free_games.data.uimodels.GameUiModel
 import com.balsa.free_games.data.usecases.GetGamesUseCase
 import com.balsa.free_games.ui.base.BaseViewModel
+import com.balsa.free_games.ui.gameslist.items.ItemModel
 import kotlinx.coroutines.launch
 
 class GamesListViewModel @ViewModelInject constructor(
     private val getGamesUseCase: GetGamesUseCase
 ) : BaseViewModel<GamesListState, GamesListEvent, GamesListAction>() {
 
+    private val uiList : MutableList<ItemModel> = arrayListOf()
     private var gamesList: MutableList<GameUiModel> = arrayListOf()
 
     override fun executeAction(action: GamesListAction) {
@@ -24,6 +26,13 @@ class GamesListViewModel @ViewModelInject constructor(
 
     private fun getGames() = viewModelScope.launch {
         gamesList = getGamesUseCase.execute().toMutableList()
-        state.postValue(GamesListState.GamesLoaded(gamesList))
+        sortAndFillUiList()
+    }
+
+    private fun sortAndFillUiList() {
+        gamesList.forEach{ game ->
+            uiList.add(ItemModel.Game(game))
+        }
+        state.postValue(GamesListState.GamesLoaded(uiList))
     }
 }

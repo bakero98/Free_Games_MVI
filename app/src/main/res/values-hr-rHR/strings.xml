@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Besplatne Igre</string>
+
+    <string name="shooter">pucacka</string>
+    <string name="strategy">strategija</string>
+    <string name="racing">trka</string>
+    <string name="sports">sport</string>
+    <string name="social">drustvena</string>
+    <string name="sandbox">sandbox</string>
+    <string name="open_world">otvoren-svijet</string>
+    <string name="survival">prezivljavanje</string>
+    <string name="pixel">piksel</string>
+    <string name="voxel">voksel</string>
+    <string name="zombie">zombi</string>
+    <string name="first_person">prvo-lice</string>
+    <string name="third_person">trece-lice</string>
+    <string name="top_down">odozgo</string>
+    <string name="tank">tenk</string>
+    <string name="space">svemir</string>
+    <string name="sailing">jedrenje</string>
+    <string name="superhero">superheroj</string>
+    <string name="permadeath">jedan-pokusaj</string>
+    <string name="card">karte</string>
+    <string name="battle_royale">battle-royale</string>
+    <string name="mmo">mmo</string>
+    <string name="anime">anime</string>
+    <string name="fantasy">fantazija</string>
+    <string name="fighting">borba</string>
+    <string name="action_rpg">akcijski-rpg</string>
+    <string name="action">akcija</string>
+    <string name="military">vojska</string>
+    <string name="martial_arts">borilacke-vjestine</string>
+    <string name="flight">letenje</string>
+    <string name="low_spec">low-spec</string>
+    <string name="tower_defense">tower-defense</string>
+    <string name="horror">horor</string>
+    <string name="unknown">nepoznato</string>
+</resources>

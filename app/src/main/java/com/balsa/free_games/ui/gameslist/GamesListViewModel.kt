@@ -6,6 +6,7 @@ import com.balsa.free_games.data.uimodels.GameUiModel
 import com.balsa.free_games.data.usecases.GetGamesUseCase
 import com.balsa.free_games.ui.base.BaseViewModel
 import com.balsa.free_games.ui.gameslist.items.ItemModel
+import com.balsa.free_games.utils.GENRE
 import kotlinx.coroutines.launch
 
 class GamesListViewModel @ViewModelInject constructor(
@@ -30,6 +31,8 @@ class GamesListViewModel @ViewModelInject constructor(
     }
 
     private fun sortAndFillUiList() {
+        uiList.add(ItemModel.Category(GENRE.getGenres().toList()))
+
         gamesList.forEach{ game ->
             uiList.add(ItemModel.Game(game))
         }

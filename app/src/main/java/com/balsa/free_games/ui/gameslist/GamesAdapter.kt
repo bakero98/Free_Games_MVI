@@ -5,8 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.balsa.free_games.databinding.ItemCardGameBinding
+import com.balsa.free_games.databinding.ItemFeedCategoriesBinding
 import com.balsa.free_games.ui.gameslist.items.ItemDiffUtil
 import com.balsa.free_games.ui.gameslist.items.ItemModel
+import com.balsa.free_games.ui.gameslist.items.categories.CategoriesViewHolder
 import com.balsa.free_games.ui.gameslist.items.game.GameViewHolder
 
 class GamesAdapter() : ListAdapter<ItemModel, RecyclerView.ViewHolder>(ItemDiffUtil) {
@@ -15,6 +17,15 @@ class GamesAdapter() : ListAdapter<ItemModel, RecyclerView.ViewHolder>(ItemDiffU
             ItemModel.GAME_MODEL -> {
                 GameViewHolder(
                     ItemCardGameBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
+            }
+            ItemModel.CATEGORY -> {
+                CategoriesViewHolder(
+                    ItemFeedCategoriesBinding.inflate(
                         LayoutInflater.from(parent.context),
                         parent,
                         false
@@ -30,8 +41,15 @@ class GamesAdapter() : ListAdapter<ItemModel, RecyclerView.ViewHolder>(ItemDiffU
             is GameViewHolder -> {
                 holder.bind((getItem(position) as ItemModel.Game).game)
             }
+            is CategoriesViewHolder -> {
+                holder.bind((getItem(position) as ItemModel.Category).categories)
+            }
             else -> throw IllegalArgumentException("Not supported ItemModel")
         }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (getItem(position) != null) getItem(position)!!.itemType else 0
     }
 
 }

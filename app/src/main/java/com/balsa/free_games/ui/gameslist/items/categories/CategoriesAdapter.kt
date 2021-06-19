@@ -41,7 +41,7 @@ class CategoryViewHolder(
     ) {
         with(binding) {
             categoryImage.loadImageDrawableCompat(category.drawableRes)
-            categoryName.text = category.name.toUpperCase()
+            categoryName.text = root.context.getString(category.labelRes).capitalize()
             if(category.isSelected == true) {
                 categoryImage.borderColor = ContextCompat.getColor(
                     root.context,

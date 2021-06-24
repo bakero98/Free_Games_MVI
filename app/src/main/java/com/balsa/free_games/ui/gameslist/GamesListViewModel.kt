@@ -15,6 +15,7 @@ class GamesListViewModel @ViewModelInject constructor(
 
     private val uiList : MutableList<ItemModel> = arrayListOf()
     private var gamesList: MutableList<GameUiModel> = arrayListOf()
+    private var categories = GENRE.getGenres().toList()
 
     override fun executeAction(action: GamesListAction) {
         super.executeAction(action)
@@ -31,7 +32,7 @@ class GamesListViewModel @ViewModelInject constructor(
     }
 
     private fun sortAndFillUiList() {
-        uiList.add(ItemModel.Category(GENRE.getGenres().toList()))
+        uiList.add(ItemModel.Category(categories))
 
         gamesList.forEach{ game ->
             uiList.add(ItemModel.Game(game))

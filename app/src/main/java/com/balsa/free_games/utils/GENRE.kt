@@ -4,7 +4,13 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.balsa.free_games.R
 
-enum class GENRE(@DrawableRes val drawableRes: Int, @StringRes val labelRes: Int, val value: String? = null) {
+enum class GENRE(
+    @DrawableRes val drawableRes: Int,
+    @StringRes val labelRes: Int,
+    val value: String? = null,
+    val isSelected: Boolean? = false
+) {
+    ALL(R.drawable.ic_all, R.string.all, isSelected = true),
     MMORPG(R.drawable.ic_swords, R.string.mmorpg),
     SHOOTER(R.drawable.ic_rifle, R.string.shooter),
     STRATEGY(R.drawable.ic_chess, R.string.strategy),
@@ -56,5 +62,7 @@ enum class GENRE(@DrawableRes val drawableRes: Int, @StringRes val labelRes: Int
         fun getGenreFromString(genre: String?) = values().firstOrNull {
             it.name.equals(genre, true)
         } ?: UNKNOWN
+
+        fun getGenres() = values()
     }
 }

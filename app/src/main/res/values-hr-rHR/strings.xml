@@ -35,4 +35,5 @@
     <string name="tower_defense">tower-defense</string>
     <string name="horror">horor</string>
     <string name="unknown">nepoznato</string>
+    <string name="all">sve</string>
 </resources>

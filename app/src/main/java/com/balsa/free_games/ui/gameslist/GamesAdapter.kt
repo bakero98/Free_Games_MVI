@@ -1,57 +1,55 @@
 package com.balsa.free_games.ui.gameslist
 
-
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.balsa.free_games.data.uimodels.GameUiModel
 import com.balsa.free_games.databinding.ItemCardGameBinding
-import com.balsa.free_games.utils.extensions.loadAllCapsString
-import com.balsa.free_games.utils.extensions.loadImage
-import com.balsa.free_games.utils.extensions.loadImageDrawableCompat
+import com.balsa.free_games.databinding.ItemFeedCategoriesBinding
+import com.balsa.free_games.ui.gameslist.items.ItemDiffUtil
+import com.balsa.free_games.ui.gameslist.items.ItemModel
+import com.balsa.free_games.ui.gameslist.items.categories.CategoriesViewHolder
+import com.balsa.free_games.ui.gameslist.items.game.GameViewHolder
 
-class GamesDiffUtil : DiffUtil.ItemCallback<GameUiModel>() {
-    override fun areItemsTheSame(oldItem: GameUiModel, newItem: GameUiModel) = oldItem.id == newItem.id
-    override fun areContentsTheSame(oldItem: GameUiModel, newItem: GameUiModel) = oldItem == newItem
-}
-
-class GamesAdapter() : ListAdapter<GameUiModel, GameViewHolder>(GamesDiffUtil()) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
-        return GameViewHolder(
-            ItemCardGameBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
-    }
-
-    override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
-        holder.bind(getItem(position))
-    }
-
-}
-
-class GameViewHolder(val binding: ItemCardGameBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(
-        game: GameUiModel
-    ) {
-        with(binding) {
-            gameImage.loadImage(
-                url = game.thumbnail,
-                centerCrop = true
-            )
-            gameTitle.text = game.title
-            genreImage.loadImageDrawableCompat(
-                game.genre.drawableRes
-            )
-            gameDescription.text = game.shortDescription
-            game.releaseDate?.let { releaseDate ->
-                releaseGenreDetails.releaseDate.text = releaseDate.year.toString()
+class GamesAdapter() : ListAdapter<ItemModel, RecyclerView.ViewHolder>(ItemDiffUtil) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            ItemModel.GAME_MODEL -> {
+                GameViewHolder(
+                    ItemCardGameBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
             }
-            releaseGenreDetails.genre.loadAllCapsString(game.genre.labelRes)
+            ItemModel.CATEGORY -> {
+                CategoriesViewHolder(
+                    ItemFeedCategoriesBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
+            }
+            else -> throw IllegalArgumentException("Not supported ItemModel")
         }
     }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when(holder) {
+            is GameViewHolder -> {
+                holder.bind((getItem(position) as ItemModel.Game).game)
+            }
+            is CategoriesViewHolder -> {
+                holder.bind((getItem(position) as ItemModel.Category).categories)
+            }
+            else -> throw IllegalArgumentException("Not supported ItemModel")
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (getItem(position) != null) getItem(position)!!.itemType else 0
+    }
+
 }

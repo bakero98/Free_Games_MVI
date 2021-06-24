@@ -1,26 +1,28 @@
 package com.balsa.free_games.ui.gameslist
 
 import android.os.Bundle
-import androidx.activity.viewModels
-import com.balsa.free_games.databinding.ActivityGamesListBinding
-import com.balsa.free_games.ui.base.BaseActivity
+import android.view.View
+import androidx.fragment.app.viewModels
+import com.balsa.free_games.R
+import com.balsa.free_games.databinding.FragmentGamesListBinding
+import com.balsa.free_games.ui.base.BaseFragment
 import com.balsa.free_games.utils.extensions.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class GamesListActivity :
-    BaseActivity<ActivityGamesListBinding, GamesListState, GamesListEvent, GamesListAction>() {
+class GamesListFragment :
+    BaseFragment<FragmentGamesListBinding, GamesListState, GamesListEvent, GamesListAction>(R.layout.fragment_games_list) {
 
-    val viewModel: GamesListViewModel by viewModels()
+    private val viewModel: GamesListViewModel by viewModels()
 
     private val adapter = GamesAdapter()
 
-    override fun doBinding() = viewBinding(ActivityGamesListBinding::inflate)
-
     override fun provideViewModel() = viewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun doBinding() = viewBinding(FragmentGamesListBinding::bind)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initUi()
         viewModel.executeAction(GamesListAction.Init)
     }
@@ -40,4 +42,5 @@ class GamesListActivity :
     }
 
     override fun onEvent(event: GamesListEvent) = Unit
+
 }

@@ -9,9 +9,13 @@ import com.balsa.free_games.utils.extensions.loadImageDrawableCompat
 
 class GameViewHolder(val binding: ItemCardGameBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bind(
-        game: GameUiModel
+        game: GameUiModel,
+        gameInterface: GameInterface
     ) {
         with(binding) {
+            root.setOnClickListener{
+                gameInterface.onOpenGameDetails(game.id)
+            }
             gameImage.loadImage(
                 url = game.thumbnail,
                 centerCrop = true
@@ -27,4 +31,8 @@ class GameViewHolder(val binding: ItemCardGameBinding) : RecyclerView.ViewHolder
             releaseGenreDetails.genre.loadAllCapsString(game.genre.labelRes)
         }
     }
+}
+
+interface GameInterface{
+    fun onOpenGameDetails(gameId: Long)
 }

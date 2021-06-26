@@ -7,6 +7,7 @@ import com.balsa.free_games.data.usecases.GetGamesUseCase
 import com.balsa.free_games.ui.base.BaseViewModel
 import com.balsa.free_games.ui.gameslist.items.ItemModel
 import com.balsa.free_games.utils.GENRE
+import com.balsa.free_games.utils.extensions.postEvent
 import kotlinx.coroutines.launch
 
 class GamesListViewModel @ViewModelInject constructor(
@@ -22,6 +23,9 @@ class GamesListViewModel @ViewModelInject constructor(
         when(action) {
             is GamesListAction.Init -> {
                 getGames()
+            }
+            is GamesListAction.OpenGameDetails -> {
+                event.postEvent(GamesListEvent.OpenGameDetails(action.gameId))
             }
         }
     }

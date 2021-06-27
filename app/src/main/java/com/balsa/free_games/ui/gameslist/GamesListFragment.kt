@@ -8,6 +8,7 @@ import com.balsa.free_games.R
 import com.balsa.free_games.databinding.FragmentGamesListBinding
 import com.balsa.free_games.ui.base.BaseFragment
 import com.balsa.free_games.ui.gameslist.items.GamesListAdapterListener
+import com.balsa.free_games.utils.extensions.goToGameDetails
 import com.balsa.free_games.utils.extensions.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -51,9 +52,7 @@ class GamesListFragment :
     override fun onEvent(event: GamesListEvent) {
         when (event) {
             is GamesListEvent.OpenGameDetails -> {
-                Navigation.findNavController(binding.root).navigate(
-                    GamesListFragmentDirections.actionGamesListFragmentToGameDetailsFragment(event.gameId)
-                )
+                goToGameDetails(event.gameId)
             }
         }
     }

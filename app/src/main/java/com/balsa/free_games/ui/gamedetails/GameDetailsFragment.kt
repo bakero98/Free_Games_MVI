@@ -5,8 +5,11 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.balsa.free_games.R
+import com.balsa.free_games.data.uimodels.GameUiModel
 import com.balsa.free_games.databinding.FragmentGameDetailsBinding
 import com.balsa.free_games.ui.base.BaseFragment
+import com.balsa.free_games.ui.reusable.ImagesRecyclerAdapter
+import com.balsa.free_games.utils.extensions.setPagerSnapHelper
 import com.balsa.free_games.utils.extensions.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,6 +24,7 @@ class GameDetailsFragment :
 
     private val viewModel: GameDetailsViewModel by viewModels()
     private val args: GameDetailsFragmentArgs by navArgs()
+    private val gameImagesAdapter = ImagesRecyclerAdapter()
 
     override fun provideViewModel() = viewModel
 
@@ -31,10 +35,23 @@ class GameDetailsFragment :
         viewModel.executeAction(GameDetailsAction.Init(args.gameId))
     }
 
-    companion object {
+    private fun initUi(game: GameUiModel) {
+        with(binding) {
+            gameName.text = game.title
 
+            imagesRecycler.adapter = gameImagesAdapter
+            gameImagesAdapter.submitList(game.screenshots)
+
+            imagesRecycler.setPagerSnapHelper()
+        }
     }
 
     override fun render(state: GameDetailsState) = Unit
-    override fun onEvent(event: GameDetailsEvent) = Unit
+    override fun onEvent(event: GameDetailsEvent) {
+        when(event) {
+            is GameDetailsEvent.GameLoaded -> {
+                initUi(event.game)
+            }
+        }
+    }
 }

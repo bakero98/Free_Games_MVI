@@ -4,10 +4,10 @@ import com.balsa.free_games.data.repositories.GamesRepository
 import com.balsa.free_games.data.uimodels.GameUiModel
 import javax.inject.Inject
 
-class GetGamesUseCase @Inject constructor(
+class GetGameDetailsUseCase @Inject constructor(
     private val gamesRepository: GamesRepository
 ) {
-    suspend fun execute() : List<GameUiModel> {
-        return gamesRepository.getGames()
+    suspend fun execute(gameId: Long) : GameUiModel {
+        return gamesRepository.getGameDetails(gameId)
     }
 }

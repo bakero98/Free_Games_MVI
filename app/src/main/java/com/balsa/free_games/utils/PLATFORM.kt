@@ -7,15 +7,15 @@ enum class PLATFORM(
     @DrawableRes val drawableRes: Int,
     val names: List<String>
 ) {
-    unknown(
+    UNKNOWN(
         R.drawable.ic_question_mark,
         listOf()
     ),
-    pc(
+    PC(
         R.drawable.ic_windows,
         listOf("Windows", "PC (Windows)")
     ),
-    web(
+    WEB(
         R.drawable.ic_world_wide_web,
         listOf("Web Browser")
     );
@@ -23,6 +23,6 @@ enum class PLATFORM(
     companion object {
         fun getPlatformFromString(name: String) = values().firstOrNull { platform ->
             platform.names.contains(name)
-        } ?: unknown
+        } ?: UNKNOWN
     }
 }

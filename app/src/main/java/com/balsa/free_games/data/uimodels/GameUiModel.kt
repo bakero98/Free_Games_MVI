@@ -13,7 +13,7 @@ data class GameUiModel(
     var shortDescription: String = "",
     var gameUrl : String = "",
     var genre: GENRE = GENRE.UNKNOWN,
-    var platform: PLATFORM = PLATFORM.unknown,
+    var platform: PLATFORM = PLATFORM.UNKNOWN,
     var publisher: String = "",
     var developer: String = "",
     var releaseDate: OffsetDateTime? = null,

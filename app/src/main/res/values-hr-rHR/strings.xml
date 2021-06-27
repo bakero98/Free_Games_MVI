@@ -36,4 +36,6 @@
     <string name="horror">horor</string>
     <string name="unknown">nepoznato</string>
     <string name="all">sve</string>
+
+    <string name="publisher">Kretaor: %s</string>
 </resources>

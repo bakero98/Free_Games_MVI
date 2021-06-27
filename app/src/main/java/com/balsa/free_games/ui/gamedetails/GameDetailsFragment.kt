@@ -45,6 +45,8 @@ class GameDetailsFragment :
 
             imagesRecycler.setPagerSnapHelper()
             platformImage.loadImageDrawableCompat(game.platform.drawableRes)
+            publishedBy.text = getString(R.string.publisher, game.developer)
+            gameDescription.text = game.longDescription
         }
     }
 

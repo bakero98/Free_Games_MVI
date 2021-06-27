@@ -9,6 +9,7 @@ import com.balsa.free_games.data.uimodels.GameUiModel
 import com.balsa.free_games.databinding.FragmentGameDetailsBinding
 import com.balsa.free_games.ui.base.BaseFragment
 import com.balsa.free_games.ui.reusable.ImagesRecyclerAdapter
+import com.balsa.free_games.utils.extensions.loadImageDrawableCompat
 import com.balsa.free_games.utils.extensions.setPagerSnapHelper
 import com.balsa.free_games.utils.extensions.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,6 +44,7 @@ class GameDetailsFragment :
             gameImagesAdapter.submitList(game.screenshots)
 
             imagesRecycler.setPagerSnapHelper()
+            platformImage.loadImageDrawableCompat(game.platform.drawableRes)
         }
     }
 

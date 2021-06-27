@@ -2,6 +2,7 @@ package com.balsa.free_games.data.models
 
 import com.balsa.free_games.data.uimodels.GameUiModel
 import com.balsa.free_games.utils.GENRE
+import com.balsa.free_games.utils.PLATFORM
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import org.threeten.bp.OffsetDateTime
@@ -31,7 +32,7 @@ data class GameModel(
             shortDescription = this@GameModel.shortDescription
             gameUrl = this@GameModel.gameUrl
             genre = GENRE.getGenreFromString(this@GameModel.genre)
-            platform = this@GameModel.platform
+            platform = PLATFORM.getPlatformFromString(this@GameModel.platform)
             publisher = this@GameModel.publisher
             developer = this@GameModel.developer
             releaseDate = this@GameModel.releaseDate

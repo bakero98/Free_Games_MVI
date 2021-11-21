@@ -3,9 +3,12 @@ package com.balsa.free_games.ui.gameslist
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import com.balsa.free_games.R
 import com.balsa.free_games.databinding.FragmentGamesListBinding
 import com.balsa.free_games.ui.base.BaseFragment
+import com.balsa.free_games.ui.gameslist.items.GamesListAdapterListener
+import com.balsa.free_games.utils.extensions.goToGameDetails
 import com.balsa.free_games.utils.extensions.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,7 +18,12 @@ class GamesListFragment :
 
     private val viewModel: GamesListViewModel by viewModels()
 
-    private val adapter = GamesAdapter()
+    private val adapter = GamesAdapter(object : GamesListAdapterListener() {
+        override fun onOpenGameDetails(gameId: Long) {
+            super.onOpenGameDetails(gameId)
+            viewModel.executeAction(GamesListAction.OpenGameDetails(gameId))
+        }
+    })
 
     override fun provideViewModel() = viewModel
 
@@ -41,6 +49,12 @@ class GamesListFragment :
         }
     }
 
-    override fun onEvent(event: GamesListEvent) = Unit
+    override fun onEvent(event: GamesListEvent) {
+        when (event) {
+            is GamesListEvent.OpenGameDetails -> {
+                goToGameDetails(event.gameId)
+            }
+        }
+    }
 
 }
